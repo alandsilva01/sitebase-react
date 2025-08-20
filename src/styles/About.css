@@ -1,0 +1,55 @@
+/* src/styles/about.css */
+
+.about-section { padding: 2rem 0; }
+
+/* layout row: no desktop é 2 colunas (imagem + texto) se houver imagem */
+.about-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* mobile: empilha */
+@media (max-width: 768px) {
+  .about-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* media (imagem) */
+.about-figure { margin: 0; }
+.about-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* heading */
+.about-heading { color: var(--primary-color); font-family: var(--primary-font); }
+
+/* text block */
+.about-text p { color: var(--text-color); line-height: 1.6; margin-bottom: 1rem; }
+
+/* CTA */
+.btn--primary { background: var(--primary-color); color: var(--light); padding: 0.6rem 1rem; border-radius: 6px; text-decoration: none; display: inline-block; }
+
+/* specialties */
+.specialties-section { margin-top: 2rem; border-radius: 8px; }
+.specialties-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 1rem; }
+@media (max-width: 992px) {
+  .specialties-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 576px) {
+  .specialties-grid { grid-template-columns: 1fr; }
+}
+
+.card-mvv { background: transparent; padding: 0.75rem; border-radius: 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; min-height: 120px; }
+.card-mvv img { width: 60px; height: 60px; object-fit:contain; }
+.card-mvv i { color: var(--primary-color); }
+
+/* small utilities */
+.sobre-title .about-heading { margin-bottom: .75rem; }

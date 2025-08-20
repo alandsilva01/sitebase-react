@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
+import EmpresaPage from "./pages/EmpresaPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App(): JSX.Element {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <Header
+        address="Av. Exemplo, 123 - São Paulo - SP"
+        contacts={[{ ddd: "11", number: "99999-9999", whatsapp: true }]}
+        email="contato@lorem.com.br"
+        logoSrc="/imagens/logo.png"
+      />
 
-export default App
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/empresa" element={<EmpresaPage />} />
+          {/* adicione outras rotas aqui */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </>
+  );
+}

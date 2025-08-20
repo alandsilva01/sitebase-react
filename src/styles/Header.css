@@ -1,0 +1,227 @@
+@import "../index.css";
+
+/* Header specific styles - src/styles/header.css
+   Reusa classes do styles-base (wrapper, d-flex, gap-10, logo, hide-mobile, etc.)
+*/
+
+/* -----------------------
+   Base / layout
+   ----------------------- */
+.site-header { position: relative; z-index: 120; }
+
+/* Topbar (desktop) */
+.topbar { background-color: var(--primary-color); padding: 8px 0; font-size: 13px; color: #fff;}
+.topbar :is(span, a) { font: 13px var(--primary-font); color: #fff; transition: .3s; }
+.topbar a:hover { opacity: 0.75;}
+
+/* Main bar (logo + nav) */
+.mainbar {
+  background: #fff;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.mainbar:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo */
+.logo img { display: block; margin: 1.75rem auto; width: 100%; max-width: 200px; height: auto; }
+
+/* -----------------------
+   Desktop nav
+   ----------------------- */
+.nav-desktop ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+.nav-desktop a {
+  color: var(--dark);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.35rem 0.25rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-desktop a i { margin-right: .5rem; }
+.nav-desktop > ul > li { position: relative; }
+
+/* -----------------------
+   Submenu desktop (vertical and aligned)
+   ----------------------- */
+.nav-desktop > ul > li > .sub-menu {
+  position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0px;
+    min-width: auto;
+    background: var(--primary-color);
+    color: var(--light);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+    padding: 0.35rem;
+    border-radius: 8px;
+    z-index: 200;
+    display: none;
+    box-sizing: border-box;
+}
+.nav-desktop .sub-menu a {
+  color: inherit; 
+  text-transform: none; 
+  font-weight: normal; 
+  padding: 0.5rem 1rem; 
+  display: block; 
+}
+/* Keep open on hover or when focused (keyboard / click) */
+.nav-desktop > ul > li:hover > .sub-menu,
+.nav-desktop > ul > li:focus-within > .sub-menu {
+  display: block;
+}
+
+.nav-desktop > ul > li > .sub-menu .sub-menu__items,
+.nav-desktop > ul > li > .sub-menu .sub-menu__list {
+  display: block !important;
+  gap: 0 !important;
+  padding: 0;
+  margin: 0;
+}
+.nav-desktop > ul > li > .sub-menu .sub-menu__list li {
+  display: block;
+  margin: 0;
+}
+.nav-desktop > ul > li > .sub-menu .sub-menu__list li a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  color: var(--light);
+  text-decoration: none;
+}
+.nav-desktop > ul > li > .sub-menu .sub-menu__list li a:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--light);
+}
+.nav-desktop > ul > li > .sub-menu .sub-menu__image { margin-top: 0.5rem; width: 100%; }
+.nav-desktop > ul > li > .sub-menu .sub-menu__image img { max-width: 100%; display: block; }
+
+/* -----------------------
+   Mobile nav / hamburger (sidebar right)
+   ----------------------- */
+.nav-mobile { display: none; }
+
+/* Hamburger button */
+.collapse__icon {
+  position: relative;
+  width: 44px;
+  height: 36px;
+  display: inline-block;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px;
+  box-sizing: content-box;
+}
+.collapse__icon span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 3px;
+  background: var(--dark);
+  border-radius: 2px;
+  transition: transform .28s cubic-bezier(.2,.8,.2,1), opacity .2s ease;
+  display: block;
+}
+.collapse__icon--1 { top: 8px; }
+.collapse__icon--2 { top: 16px; }
+.collapse__icon--3 { top: 24px; }
+
+.collapse__icon.active .collapse__icon--1 {
+  transform: translateX(-50%) translateY(8px) rotate(45deg);
+}
+.collapse__icon.active .collapse__icon--2 {
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0);
+}
+.collapse__icon.active .collapse__icon--3 {
+  transform: translateX(-50%) translateY(-8px) rotate(-45deg);
+}
+
+/* Overlay: ocupa toda a viewport, mas fica atrás do painel da direita (menu) */
+.mobile-dark-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 90;
+  display: none;
+}
+.mobile-dark-overlay.active { display: block; }
+
+/* Painel lateral do menu (desliza da direita) */
+.menu__collapsible {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 320px;
+  background: var(--light);
+  transform: translateX(100%);
+  transition: transform .32s cubic-bezier(.2,.8,.2,1);
+  z-index: 100;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.menu__collapsible.open { transform: translateX(0); }
+
+/* inner area to hold the close button and content */
+.menu__inner { padding-bottom: 3rem; }
+.menu__close { display: flex; justify-content: flex-end; padding: .5rem; }
+
+/* menu items */
+.menu__items { list-style: none; margin: 0; padding: 0.5rem 0; }
+.menu__item { border-bottom: 1px solid rgba(0,0,0,0.05); }
+.menu__item a { display: inline-flex; align-items: center; gap: 0.75rem; padding: 0.9rem 1rem; color: var(--dark); text-decoration: none; width: 100%; }
+
+/* submenu mobile (expandido) */
+.submenu-mobile {
+  list-style: none;
+  padding-left: 1.25rem;
+  margin: .5rem 0;
+  background: var(--primary-color);
+  color: var(--light);
+}
+.submenu-mobile li a {
+  padding: 0.45rem 1rem;
+  display:block;
+  color: var(--light);
+}
+
+/* -----------------------
+   Utilities / responsiveness
+   ----------------------- */
+.lock-scroll { overflow: hidden !important; }
+
+/* breakpoints */
+@media (max-width: 992px) {
+  .topbar { display: none !important; }
+  .nav-desktop { display: none !important; }
+  .nav-mobile { display: block !important; }
+  .menu__collapsible { display: block; } /* painel existe, visibilidade via transform/open */
+  .nav-desktop > ul > li:hover > .sub-menu { display: none; }
+  .nav-desktop > ul > li > .sub-menu { position: static; box-shadow: none; padding: 0; border-radius: 0; display: none !important; }
+}
+
+/* desktop: esconder painel/overlay */
+@media (min-width: 993px) {
+  .nav-mobile { display: none !important; }
+  .menu__collapsible { display: none !important; }
+  .mobile-dark-overlay { display: none !important; }
+}
+
+/* polimento */
+.menu__collapsible .wrapper { padding-top: 0.5rem; padding-bottom: 0.5rem; }

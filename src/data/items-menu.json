@@ -1,0 +1,13 @@
+{
+  "Home": { "url": "" },
+  "Empresa": { "url": "empresa" },
+  "Serviços": {
+    "url": "servicos",
+    "submenu": {
+      "Segmento A": { "url": "segmento-a" },
+      "Segmento B": { "url": "segmento-b" }
+    }
+  },
+  "Contato": { "url": "contato" },
+  "Informações": { "url": "informacoes", "icon": "fa-solid fa-circle-info", "hideLabel": true, "submenu": {} }
+}
